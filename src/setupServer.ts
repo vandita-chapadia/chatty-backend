@@ -15,15 +15,12 @@ import compression from 'compression';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import HTTP_STATUS from 'http-status-codes';
-import { createAdapter } from '@socket.io/redis-adapter';
-import { config } from './config';
-import applicationRoutes from './routes';
 import 'express-async-errors';
-import {
-  CustomError,
-  IErrorResponse,
-} from './shared/globals/helpers/error-handler';
 import Logger from 'bunyan';
+import { createAdapter } from '@socket.io/redis-adapter';
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
+import { CustomError, IErrorResponse } from '@global/helpers/error-handler';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -130,5 +127,7 @@ export class ChattyServer {
     });
   }
 
-  private socketIOConnections(io: Server): void {}
+  private socketIOConnections(io: Server): void {
+    log.info(`socketIOConnections ${io}`);
+  }
 }
